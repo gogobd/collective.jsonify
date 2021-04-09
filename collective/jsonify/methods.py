@@ -1,4 +1,4 @@
-from wrapper import Wrapper
+from collective.jsonify.wrapper import Wrapper
 try:
     import binascii
     def _base64decode(s):
@@ -35,7 +35,8 @@ def get_item(self):
 
     try:
         context_dict = Wrapper(self)
-    except Exception, e:
+    except Exception:
+        _, e = sys.exc_info()[:2]
         etype = sys.exc_info()[0]
         tb = pprint.pformat(traceback.format_tb(sys.exc_info()[2]))
         return 'ERROR: exception wrapping object: %s: %s\n%s' % (
@@ -47,7 +48,8 @@ def get_item(self):
         try:
             JSON = json.dumps(context_dict)
             passed = True
-        except Exception, error:
+        except Exception:
+            _, error = sys.exc_info()[:2]
             if "serializable" in str(error):
                 key, context_dict = _clean_dict(context_dict, error)
                 pprint.pprint(

@@ -288,7 +288,7 @@ class Wrapper(dict):
                     except AttributeError:
                         # maybe an int?
                         value = unicode(value)
-                    except Exception, e:
+                    except Exception as e:
                         raise Exception('problems with %s: %s' % (
                             self.context.absolute_url(), str(e))
                         )
@@ -354,7 +354,7 @@ class Wrapper(dict):
                     except AttributeError:
                         # maybe an int?
                         fname = unicode(fname)
-                    except Exception, e:
+                    except Exception as e:
                         raise Exception(
                             'problems with %s: %s' % (
                                 self.context.absolute_url(), str(e)
@@ -851,7 +851,7 @@ class Wrapper(dict):
                 except AttributeError:
                     # maybe an int?
                     fname = unicode(fname)
-                except Exception, e:
+                except Exception as e:
                     raise Exception('problems with %s: %s' %
                                     (self.context.absolute_url(), str(e)))
 
@@ -893,7 +893,7 @@ class Wrapper(dict):
                 try:
                     dateaux = datetime.datetime.fromtimestamp(meta.get('timestamp',0))
                     meta['timestamp'] = dateaux.strftime("%Y/%m/%d %H:%M:%S GMT")
-                except Exception, ex:
+                except Exception as ex:
                     meta['timestamp']=''
                 history_list.append(meta)
             self['_history'] = history_list
